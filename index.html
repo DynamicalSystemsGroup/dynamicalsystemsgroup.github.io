@@ -184,7 +184,8 @@
       background-color: var(--ink-deep);
       border-bottom: 1px solid var(--rule);
     }
-    .demo-card__thumb img {
+    .demo-card__thumb img,
+    .demo-card__thumb video {
       display: block;
       width: 100%;
       height: 100%;
@@ -306,7 +307,11 @@
         <article class="demo-card-wrap">
           <a class="demo-card" href="https://dynamicalsystemsgroup.github.io/geospatial-demo/">
             <div class="demo-card__thumb">
-              <img src="assets/screenshots/geospatial-demo.png" alt="Screenshot of the Garbage Collection Lifecycle geospatial simulator" loading="lazy">
+              <video autoplay muted loop playsinline preload="metadata"
+                     poster="assets/screenshots/garbage.poster.jpg"
+                     aria-label="Looping recording of the Garbage Collection Lifecycle simulator running over real terrain">
+                <source src="assets/screenshots/garbage.webm" type="video/webm">
+              </video>
             </div>
             <div class="demo-card__body">
               <span class="eyebrow">02 · Geospatial simulation</span>
@@ -321,12 +326,16 @@
         <article class="demo-card-wrap">
           <a class="demo-card" href="https://dynamicalsystemsgroup.github.io/github-rebrand-ops/">
             <div class="demo-card__thumb">
-              <img src="assets/screenshots/github-rebrand-ops.png" alt="SysML v2 model from the GitHub Brand Operations demo" loading="lazy">
+              <video autoplay muted loop playsinline preload="metadata"
+                     poster="assets/screenshots/rebrand.poster.jpg"
+                     aria-label="Looping recording of the GitHub Brand Operations simulator stepping through an org rebrand">
+                <source src="assets/screenshots/rebrand.webm" type="video/webm">
+              </video>
             </div>
             <div class="demo-card__body">
-              <span class="eyebrow">03 · SysML v2 model</span>
+              <span class="eyebrow">03 · Executable model</span>
               <h3 class="demo-card__title">GitHub Brand Operations</h3>
-              <p class="demo-card__desc">A SysML v2 model of an organization rebrand on GitHub, paired with an in-browser simulator. Step through repo migrations, admin handoffs, and redirects, with each run reproducible from JSON-LD.</p>
+              <p class="demo-card__desc">An in-browser simulator of an organization rebrand on GitHub, backed by a SysML v2 model. Step through repo migrations, admin handoffs, and redirects, with each run reproducible from JSON-LD.</p>
               <span class="demo-card__cta">Open demo <span class="arrow">&rarr;</span></span>
             </div>
           </a>
