@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!--
+  Dynamical Systems Group — Demonstrations index
+
+  A showcase of interactive demos hosted under dynamicalsystemsgroup.github.io.
+  Built on the DSG design system (../dsg-design-system). Token values inlined
+  for portability, matching the design-system's own example layouts.
+
+  To add a demo: copy one <article class="demo-card"> block in the grid below,
+  drop a 16:10-ish screenshot into assets/screenshots/, and update the three
+  fields (eyebrow, title, description) plus the href.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dynamical Systems Group — Demonstrations</title>
+  <meta name="description" content="Interactive demonstrations from Dynamical Systems Group: small, runnable artifacts that show methods on real problems.">
+
+  <link rel="icon" type="image/png" href="assets/favicons/favicon-light-512.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="assets/favicons/favicon-dark-512.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="assets/favicons/favicon-webclip-512.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* ── Color (verified DSG tokens) ── */
+      --paper:       #EBE6D6;
+      --paper-deep:  #E0DBC8;
+      --ink:         #1B1B4A;
+      --ink-deep:    #11113A;
+      --ink-mid:     #4A5460;
+      --navy:        #1B1B4A;
+      --rule:        #C8C0AE;
+      --rule-soft:   rgba(27, 27, 74, 0.18);
+      --brass:       #B08A3E;
+      --brass-deep:  #8E6B1F;
+      --paper-muted: rgba(235, 230, 214, 0.65);
+
+      /* ── Type ── */
+      --serif: "Source Serif 4", Charter, Georgia, serif;
+      --mono:  "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+
+      /* ── Layout ── */
+      --gutter:        clamp(16px, 4vw, 64px);
+      --container-max: 1200px;
+      --duration:      200ms;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--brass); text-decoration: underline; transition: color var(--duration); }
+    a:hover { color: var(--brass-deep); }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--brass-deep);
+    }
+
+    /* ═══════════ NAVBAR — brass-on-navy bookend ═══════════ */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0 var(--gutter);
+      min-height: 5rem;
+      background-color: var(--navy);
+      border-bottom: 1px solid var(--ink-deep);
+    }
+    .navbar__brand { display: inline-flex; align-items: center; height: 100%; }
+    .navbar__brand img { display: block; height: 2.6rem; width: auto; }
+    .navbar__tag {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--brass);
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      .navbar { min-height: 4rem; }
+      .navbar__brand img { height: 2rem; }
+      .navbar__tag { display: none; }
+    }
+
+    /* ═══════════ HERO ═══════════ */
+    .hero {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 80px) var(--gutter) clamp(28px, 4vw, 52px);
+    }
+    .hero .eyebrow { display: block; margin-bottom: 1rem; }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      letter-spacing: -0.018em;
+      margin: 0 0 1.125rem 0;
+      max-width: 16ch;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.1875rem);
+      line-height: 1.55;
+      margin: 0;
+      max-width: 62ch;
+      color: var(--ink);
+    }
+    .hero p + p { margin-top: 1rem; }
+
+    /* Hairline section rule below hero */
+    .section-rule {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      border: 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ═══════════ DEMO GRID ═══════════ */
+    .demos {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: clamp(28px, 4vw, 52px) var(--gutter) clamp(40px, 6vw, 88px);
+    }
+    .demos__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: clamp(18px, 2.6vw, 28px);
+    }
+    .demos__head h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.12;
+      letter-spacing: -0.012em;
+      margin: 0;
+    }
+    .demos__count { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mid); }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: clamp(14px, 2vw, 22px);
+    }
+
+    .demo-card {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--paper);
+      border: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: border-color var(--duration), transform var(--duration);
+    }
+    .demo-card:hover { border-color: var(--brass); transform: translateY(-2px); }
+    .demo-card:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+
+    .demo-card__thumb {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background-color: var(--ink-deep);
+      border-bottom: 1px solid var(--rule);
+    }
+    .demo-card__thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+    }
+
+    .demo-card__body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: clamp(16px, 1.8vw, 22px);
+    }
+    .demo-card__body .eyebrow { margin-bottom: 0.625rem; }
+    .demo-card__title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+      margin: 0 0 0.5rem 0;
+    }
+    .demo-card__desc {
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--ink-mid);
+      margin: 0 0 1.125rem 0;
+    }
+    .demo-card__cta {
+      margin-top: auto;
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--brass-deep);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .demo-card__cta .arrow { transition: transform var(--duration); }
+    .demo-card:hover .demo-card__cta { color: var(--brass); }
+    .demo-card:hover .demo-card__cta .arrow { transform: translateX(4px); }
+
+    /* ═══════════ FOOTER — brass-on-navy bookend ═══════════ */
+    .footer {
+      background-color: var(--navy);
+      border-top: 1px solid var(--ink-deep);
+    }
+    .footer__inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: clamp(40px, 6vw, 72px) var(--gutter);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .footer__slug {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--brass);
+      margin: 0;
+    }
+    .footer__note {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9375rem;
+      color: var(--paper-muted);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a class="navbar__brand" href="/" aria-label="Dynamical Systems Group">
+      <img src="assets/logos/lockup-brass-on-navy.png" alt="Dynamical Systems Group">
+    </a>
+    <a class="navbar__tag" href="https://dynamicalsystemsgroup.com">dynamicalsystemsgroup.com</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="eyebrow">Demonstrations</span>
+      <h1>Interactive demonstrations.</h1>
+      <p>Small, runnable artifacts from Dynamical Systems Group. Each one shows a method applied to a real problem, self-contained and reproducible in the browser.</p>
+    </section>
+
+    <hr class="section-rule">
+
+    <section class="demos">
+      <div class="demos__head">
+        <h2>Demos</h2>
+        <span class="demos__count">04 hosted</span>
+      </div>
+
+      <div class="demo-grid">
+
+        <!-- ── Demo ── -->
+        <article class="demo-card-wrap">
+          <a class="demo-card" href="https://dynamicalsystemsgroup.github.io/ADCS-lifecycle-demo/">
+            <div class="demo-card__thumb">
+              <img src="assets/screenshots/ADCS-lifecycle-demo.png" alt="Screenshot of the ADCS Lifecycle Demo notebook" loading="lazy">
+            </div>
+            <div class="demo-card__body">
+              <span class="eyebrow">01 · Marimo notebook</span>
+              <h3 class="demo-card__title">ADCS Lifecycle Demo</h3>
+              <p class="demo-card__desc">Bidirectional requirements traceability for a satellite attitude-determination and control system. Walks the full verification lifecycle, with evidence any auditor can interrogate and reproduce.</p>
+              <span class="demo-card__cta">Open demo <span class="arrow">&rarr;</span></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- ── Demo ── -->
+        <article class="demo-card-wrap">
+          <a class="demo-card" href="https://dynamicalsystemsgroup.github.io/geospatial-demo/">
+            <div class="demo-card__thumb">
+              <img src="assets/screenshots/geospatial-demo.png" alt="Screenshot of the Garbage Collection Lifecycle geospatial simulator" loading="lazy">
+            </div>
+            <div class="demo-card__body">
+              <span class="eyebrow">02 · Geospatial simulation</span>
+              <h3 class="demo-card__title">Garbage Collection Lifecycle</h3>
+              <p class="demo-card__desc">A geospatial simulator over synthetic or real terrain (DEM / FABDEM). Set the parameters, run in the browser, and reproduce any run from its JSON-LD record.</p>
+              <span class="demo-card__cta">Open demo <span class="arrow">&rarr;</span></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- ── Demo ── -->
+        <article class="demo-card-wrap">
+          <a class="demo-card" href="https://dynamicalsystemsgroup.github.io/github-rebrand-ops/">
+            <div class="demo-card__thumb">
+              <img src="assets/screenshots/github-rebrand-ops.png" alt="SysML v2 model from the GitHub Brand Operations demo" loading="lazy">
+            </div>
+            <div class="demo-card__body">
+              <span class="eyebrow">03 · SysML v2 model</span>
+              <h3 class="demo-card__title">GitHub Brand Operations</h3>
+              <p class="demo-card__desc">A SysML v2 model of an organization rebrand on GitHub, paired with an in-browser simulator. Step through repo migrations, admin handoffs, and redirects, with each run reproducible from JSON-LD.</p>
+              <span class="demo-card__cta">Open demo <span class="arrow">&rarr;</span></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- ── Demo ── -->
+        <article class="demo-card-wrap">
+          <a class="demo-card" href="https://pedalhidro.github.io/simujaules/">
+            <div class="demo-card__thumb">
+              <img src="assets/screenshots/simujaules.png" alt="Screenshot of the Simujaules bicycle geo-energetic simulator over terrain" loading="lazy">
+            </div>
+            <div class="demo-card__body">
+              <span class="eyebrow">04 · Geospatial simulation</span>
+              <h3 class="demo-card__title">Simujaules</h3>
+              <p class="demo-card__desc">A bicycle geo-energetic simulator. Load a digital elevation model, pull road networks from OpenStreetMap, and compute energy-aware routes over real terrain.</p>
+              <span class="demo-card__cta">Open demo <span class="arrow">&rarr;</span></span>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__slug">Dynamical Systems Group · Complex systems, engineered.</p>
+      <p class="footer__note">Demonstrations, not position papers.</p>
+    </div>
+  </footer>
+</body>
+</html>
